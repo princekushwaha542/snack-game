@@ -15,6 +15,8 @@ main,section{
  :root{
     --bg-primary-color:rgb(19, 18, 18);
     --text-primary-color:rgb(238, 234, 234);
+    --bg-fill-color:rgb(216, 224, 213);
+    --bg-food-color:red;
  }
  html{
 
@@ -50,9 +52,16 @@ main,section{
     margin-bottom: 3%;
     display: grid;
     flex-grow: 1;
-    grid-template-columns: repeat(auto-fill,minmax(50px,1fr));
-    grid-template-rows: repeat(auto-fill,minmax(50px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(30px,1fr));
+    grid-template-rows: repeat(auto-fill,minmax(30px,1fr));
  }
- .block{
-    border: 1px solid rgb(56, 55, 55);
+
+ .fill{
+   background-color:var(--bg-fill-color);
+   border-radius: 5px;
+
+ }
+ .food{
+   background-color: var(--bg-food-color); 
+   border-radius: 50%;
  }
