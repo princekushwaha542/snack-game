@@ -65,3 +65,40 @@ main,section{
    background-color: var(--bg-food-color); 
    border-radius: 50%;
  }
+ .head{
+   background-color: rgb(94, 93, 90);
+ }
+ .modal{
+   height: 100vh;
+   width: 100vw;
+   top: 1%;
+   position: fixed;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   backdrop-filter: bulr(4px);
+ }
+ .start-game,.game-over{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 4px;
+   color: wheat;
+ }
+ .game-over{
+   display: none;
+ }
+ .btn{
+   padding: 10px 20px;
+   border: none;
+   background-color: rgb(230, 234, 229);
+   color: rgb(21, 21, 20);
+   font-size: 13px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: all 0.4s ease;
+ }
+ .btn:hover{
+   transform: scale(1.1);
+ }
