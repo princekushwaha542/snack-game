@@ -11,15 +11,16 @@ const restartBtn = document.querySelector(".btn-restart");
 const startGame = document.querySelector(".start-game");
 
 let highScore = document.querySelector("#high-score");
-let time = document.querySelector("#time");
+let timeElement = document.querySelector("#time");
 let score = document.querySelector("#score")
 
 let hScore = 0;
-let t = `00-00`;
+var time = `0-0`;
 let s = 0;
 highScore.innerText = "0";
 
 let intervalId = null;
+let timeintervalId = null;
 let direction = "right";
 
 let snake;
@@ -33,6 +34,7 @@ function initGame() {
         { x: 1, y: 4 },
         { x: 1, y: 5 }
     ];
+
 
     direction = "right";
 
@@ -87,9 +89,9 @@ function startGameLoop() {
             gameOverModal.style.display = "flex";
             modal.style.display = "flex";
             startGame.style.display = "none";
+            time=timeElement;
             return;
         }
-
         snake.unshift(newHead);
 
         // food collision
@@ -128,13 +130,29 @@ startBtn.addEventListener("click", () => {
     modal.style.display = "none";
     initGame();
     startGameLoop();
+
+timeintervalId = setInterval(() => {
+    let [min, sec] = time.split("-").map(Number);
+
+    if (sec >= 59) {
+        min += 1;
+        sec = 0;
+    } else {
+        sec += 1;
+    }
+
+    time = `${min}-${sec}`;
+    timeElement.innerText = time;
+
+}, 1000);
+
 });
 
 // restart button
 restartBtn.addEventListener("click", () => {
     gameOverModal.style.display = "none";
     modal.style.display = "none";
-
+    time=`00-00`
     initGame();
     startGameLoop();
     score.innerText = "0";
