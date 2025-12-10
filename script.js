@@ -1,4 +1,8 @@
 let board = document.querySelector(".board");
+let upbtn=document.querySelector(".up");
+let downbtn=document.querySelector(".down");
+let leftbtn=document.querySelector(".left");
+let rightbtn=document.querySelector(".right");
 const blockHeight = 30;
 const blockWidth = 30;
 const rows = Math.floor(board.clientHeight / blockHeight);
@@ -15,15 +19,9 @@ let timeElement = document.querySelector("#time");
 let score = document.querySelector("#score")
 
 let hScore = 0;
-var time = 0-0;
+var time = `0-0`;
 let s = 0;
 highScore.innerText = "0";
-
-// High score check on load
-if(localStorage.getItem("ghScore")) {
-    hScore = parseInt(localStorage.getItem("ghScore"));
-    highScore.innerText = hScore;
-}
 
 let intervalId = null;
 let timeintervalId = null;
@@ -40,6 +38,7 @@ function initGame() {
         { x: 1, y: 4 },
         { x: 1, y: 5 }
     ];
+
 
     direction = "right";
 
@@ -91,16 +90,12 @@ function startGameLoop() {
             newHead.y < 0 || newHead.y >= cols
         ) {
             clearInterval(intervalId);
-            clearInterval(timeintervalId); // Time rokna zaroori hai
             gameOverModal.style.display = "flex";
             modal.style.display = "flex";
             startGame.style.display = "none";
+            time=timeElement;
             return;
         }
-        
-        // Body collision check (Snake khud ko na kaat le)
-        // (Optional: Aap chahein to add kar sakte hain logic yahan)
-
         snake.unshift(newHead);
 
         // food collision
@@ -116,6 +111,7 @@ function startGameLoop() {
                 hScore = s;
                 localStorage.setItem("ghScore", hScore.toString())
                 highScore.innerText = localStorage.getItem("ghScore")
+
             }
         } else {
             snake.pop();
@@ -125,54 +121,26 @@ function startGameLoop() {
     }, 200);
 }
 
-// --- Keyboard Controls ---
+// controls
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowUp" && direction !== "down") direction = "up";
     if (e.key === "ArrowDown" && direction !== "up") direction = "down";
     if (e.key === "ArrowLeft" && direction !== "right") direction = "left";
     if (e.key === "ArrowRight" && direction !== "left") direction = "right";
 });
+upbtn.addEventListener("click",()=>{
+    if (direction !== "down") direction = "up";
+})
+downbtn.addEventListener("click",()=>{
+    if (direction !== "up") direction = "down";
+})
+leftbtn.addEventListener("click",()=>{
+    if (direction !== "right") direction = "left";
+})
+rightbtn.addEventListener("click",()=>{
+    if (direction !== "left") direction = "right";
+})
 
-// --- NEW MOBILE SWIPE CONTROLS ADDED HERE ---
-let touchStartX = 0;
-let touchStartY = 0;
-const gameArea = document.body; // Puri screen par touch kaam karega
-
-gameArea.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-}, false);
-
-gameArea.addEventListener('touchend', function(e) {
-    let touchEndX = e.changedTouches[0].screenX;
-    let touchEndY = e.changedTouches[0].screenY;
-    handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
-}, false);
-
-function handleSwipe(startX, startY, endX, endY) {
-    let diffX = endX - startX;
-    let diffY = endY - startY;
-
-    // Chhote touch ko ignore karein (galti se touch)
-    if (Math.abs(diffX) < 30 && Math.abs(diffY) < 30) return;
-
-    if (Math.abs(diffX) > Math.abs(diffY)) {
-        // Horizontal Swipe
-        if (diffX > 0 && direction !== "left") {
-            direction = "right";
-        } else if (diffX < 0 && direction !== "right") {
-            direction = "left";
-        }
-    } else {
-        // Vertical Swipe
-        if (diffY > 0 && direction !== "up") {
-            direction = "down";
-        } else if (diffY < 0 && direction !== "down") {
-            direction = "up";
-        }
-    }
-}
-// ----------------------------------------
 
 // start button
 startBtn.addEventListener("click", () => {
@@ -180,53 +148,30 @@ startBtn.addEventListener("click", () => {
     initGame();
     startGameLoop();
 
-    // Reset time correctly
-    time = 0-0; 
-    
-    clearInterval(timeintervalId);
-    timeintervalId = setInterval(() => {
-        let [min, sec] = time.split("-").map(Number);
+timeintervalId = setInterval(() => {
+    let [min, sec] = time.split("-").map(Number);
 
-        if (sec >= 59) {
-            min += 1;
-            sec = 0;
-        } else {
-            sec += 1;
-        }
+    if (sec >= 59) {
+        min += 1;
+        sec = 0;
+    } else {
+        sec += 1;
+    }
 
-        time = `${min}-${sec}`;
-        timeElement.innerText = time;
+    time = `${min}-${sec}`;
+    timeElement.innerText = time;
 
-    }, 1000);
+}, 1000);
+
 });
 
 // restart button
 restartBtn.addEventListener("click", () => {
     gameOverModal.style.display = "none";
     modal.style.display = "none";
-    
-    // Time reset logic
-    time = 0-0;
-    timeElement.innerText = time;
-    clearInterval(timeintervalId);
-    
-    // Restart logic
-    score.innerText = "0";
-    s = 0;
-    
-    // Time start again
-    timeintervalId = setInterval(() => {
-        let [min, sec] = time.split("-").map(Number);
-        if (sec >= 59) {
-            min += 1;
-            sec = 0;
-        } else {
-            sec += 1;
-        }
-        time = `${min}-${sec}`;
-        timeElement.innerText = time;
-    }, 1000);
-
+    time=`00-00`
     initGame();
     startGameLoop();
+    score.innerText = "0";
+    s = 0;
 });
