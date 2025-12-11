@@ -16,9 +16,11 @@ main,section{
     height: 16vh;
     width: 100vh;
     position: fixed;
-    bottom: 50px;
+    bottom: 20px;
     display: flex;
-    color: rgb(255, 255, 255);
+    color: rgb(126, 107, 107);
+    left: 25%;
+    gap: 0;
     display: none;
 }
 .up:hover{
@@ -35,23 +37,29 @@ main,section{
   color: #fff;
 }
  .up{
-    font-size: 90px;
+    font-size: 60px;
+    display: block;
     opacity: 0.2;
+    margin-left: 80px;
  }
  .down{
-    font-size: 90px;
+    font-size: 60px;
+    display: block;
     opacity: 0.2;
+    margin-left: 80px;
     
  }
   .left{
-    font-size: 110px;
+    font-size: 60px;
     opacity: 0.2;
+    margin-right: 50px;
+
 
  }
    .right{
-    font-size: 110px;
+    font-size: 60px;
     opacity: 0.2;
-
+    margin-left: 60px;
   
  }
  
