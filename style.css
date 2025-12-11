@@ -13,19 +13,20 @@ main,section{
     width: 100%;
 }
 #mobile-control{
+    height: 16vh;
+    width: 100vh;
     position: fixed;
     bottom: 50px;
-    left: 70%;
-    transform: translateX(-50%);
     display: flex;
-    color: rgb(119, 117, 117);
+    color: rgb(255, 255, 255);
     display: none;
 }
 .up:hover{
   color: #fff;
 }
 .down:hover{
-  color: #fff;  
+  color: #fff;
+  
 }
 .left:hover{
   color: #fff;
@@ -34,24 +35,23 @@ main,section{
   color: #fff;
 }
  .up{
-    font-size: 40px;
-    display: block;
-    padding-left: 35px;
-  
+    font-size: 90px;
+    opacity: 0.2;
  }
  .down{
-    font-size: 40px;
-    display: block;
-    padding-left: 35px;
-  
+    font-size: 90px;
+    opacity: 0.2;
+    
  }
   .left{
-    font-size: 40px;
-    padding-right: 20px;
+    font-size: 110px;
+    opacity: 0.2;
+
  }
    .right{
-    font-size: 40px;
-    padding-left: 10px;
+    font-size: 110px;
+    opacity: 0.2;
+
   
  }
  
@@ -152,11 +152,25 @@ main,section{
  @media (max-width:600px) {
   #mobile-control{
     display: initial;
-    bottom: 10%;
+    bottom: 4%;
   }
 .infos{
   padding-left: 2%;
   padding-right: 2%;
 }
+ .board{
+    height: 73vh;
+    width: 90%;
+    border: 2px solid rgb(56, 55, 55);
+    box-sizing: border-box;
+    margin-left: 4%;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: repeat(auto-fill,minmax(30px,1fr));
+    grid-template-rows: repeat(auto-fill,minmax(30px,1fr));
+ }
+
 
  }
