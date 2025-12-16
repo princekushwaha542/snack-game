@@ -157,10 +157,25 @@ main,section{
  .btn:hover{
    transform: scale(1.1);
  }
+ #range{
+  height: 100px;
+  width: 300px;
+  color: crimson;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 60%;
+ }
+ .Rbtn{
+  height: 30px;
+  width: 30px;
+  display: block;
+ }
  @media (max-width:600px) {
   #mobile-control{
     display: initial;
-    bottom: 4%;
+    bottom: 8%;
   }
 .infos{
   padding-left: 2%;

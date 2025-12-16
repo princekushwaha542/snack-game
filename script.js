@@ -3,6 +3,7 @@ let upbtn=document.querySelector(".up");
 let downbtn=document.querySelector(".down");
 let leftbtn=document.querySelector(".left");
 let rightbtn=document.querySelector(".right");
+let Rbtn = document.querySelector(".Rbtn");
 const blockHeight = 30;
 const blockWidth = 30;
 const rows = Math.floor(board.clientHeight / blockHeight);
@@ -93,6 +94,7 @@ function startGameLoop() {
             gameOverModal.style.display = "flex";
             modal.style.display = "flex";
             startGame.style.display = "none";
+            Rbtn.style.display = "none";
             time=timeElement;
             return;
         }
@@ -118,7 +120,7 @@ function startGameLoop() {
         }
 
         render();
-    }, 200);
+    },Rbtn.value);
 }
 
 // controls
@@ -169,6 +171,7 @@ timeintervalId = setInterval(() => {
 restartBtn.addEventListener("click", () => {
     gameOverModal.style.display = "none";
     modal.style.display = "none";
+    Rbtn.style.display = "none";
     time=`00-00`
     initGame();
     startGameLoop();
